@@ -18,4 +18,18 @@ jobs:
       - name: Set Node.js Environment
         uses: actions/setup-node@v2
         with:
-          node-version: 12.14
+          node-version: 14.17
+
+      - run: |
+          npm install -g @angular/cli  > /dev/null
+          npm install karma
+          npm install
+
+      - name: Lint Test
+        run: ng lint
+
+      - name: Unit Test
+        run: ng test --browsers=ChromeHeadless --watch=false --code-coverage
+
+      - name: Build
+        run: ng build --prod
